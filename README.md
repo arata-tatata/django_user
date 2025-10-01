@@ -14,27 +14,32 @@
 <details>
 <summary>▶︎ 実際のコードを見る (Click to see code)</summary>
 
-<br>
-
-**1. `accounts` アプリの作成**
-
-ターミナルで以下のコマンドを実行します。
-
-```bash
-python manage.py startapp accounts
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'memos.apps.MemosConfig',
-    'accounts.apps.AccountsConfig', # この行を追加
-]
-```
-> **Note:** `apps.py` 内のクラス名 (`AccountsConfig`) を指定する、よりモダンな書き方を採用しています。
+> **1. `accounts` アプリの作成**
+>
+> ターミナルで以下のコマンドを実行します。
+>
+> ```bash
+> python manage.py startapp accounts
+> ```
+>
+> **2. プロジェクトへのアプリ登録**
+>
+> `memoproject/settings.py` ファイルを開き、`INSTALLED_APPS` リストに新しいアプリを追加します。
+>
+> ```python:memoproject/settings.py
+> INSTALLED_APPS = [
+>     'django.contrib.admin',
+>     'django.contrib.auth',
+>     'django.contrib.contenttypes',
+>     'django.contrib.sessions',
+>     'django.contrib.messages',
+>     'django.contrib.staticfiles',
+>     'memos.apps.MemosConfig',
+>     'accounts.apps.AccountsConfig', # この行を追加
+> ]
+> ```
+>
+> > **Note:** `apps.py` 内のクラス名 (`AccountsConfig`) を指定する、よりモダンな書き方を採用しています。
 
 </details>
 
