@@ -32,7 +32,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'memos.apps.MemosConfig',
     'accounts.apps.AccountsConfig', # この行を追加
-]```
+]
+```
 > **Note:** `apps.py` 内のクラス名 (`AccountsConfig`) を指定する、よりモダンな書き方を採用しています。
 
 </details>
