@@ -62,6 +62,7 @@
 
 <br>
 
+
 ### STEP 4: ログイン・ログアウト機能の実装 🚪
 
 作成済みのアカウントでログイン・ログアウトできるようにします。
@@ -69,7 +70,74 @@
 -   Django組み込みの `LoginView`, `LogoutView` を活用
 -   ログインページのテンプレートを作成
 -   ログイン後・ログアウト後のリダイレクト先を `settings.py` に設定
+
+<details>
+<summary>▶︎ 実際のコードを見る (Click to see code)</summary>
+
+**URL、テンプレート、設定ファイルの編集**
+
+Djangoに標準で用意されている認証ビューを活用し、少ないコードでログイン・ログアウト機能を実装します。
+
+```python
+# --- accounts/urls.py ---
+# ログインとログアウトのURLを追加します。
+
+from django.urls import path
+# 認証ビュー（LoginView, LogoutView）をインポート
+from django.contrib.auth import views as auth_views
+from . import views
+
+app_name = 'accounts'
+
+urlpatterns = [
+    path('signup/', views.signup_view, name='signup'),
+    
+    # /accounts/login/ へのアクセスでLoginViewを呼び出す
+    # テンプレートは 'accounts/login.html' を使用
+    path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
+    
+    # /accounts/logout/ へのアクセスでLogoutViewを呼び出す
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+]
+
+
+# --- accounts/templates/accounts/login.html (新規作成) ---
+# ログインフォーム用のテンプレートを新規作成します。
+
+{% extends 'base.html' %}
+
+{% block title %}ログイン{% endblock %}
+
+{% block content %}
+<h1 class="page-title">ログイン</h1>
+
+<form method="post" class="memo-form">
+    {% csrf_token %}
+    
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary">ログイン</button>
+</form>
+{% endblock %}
+
+
+# --- memoproject/settings.py ---
+# ログイン・ログアウト後のリダイレクト先を追記します。
+# ファイルの末尾あたりに追加してください。
+
+# ... (既存の設定) ...
+
+# ログイン成功後にリダイレクトされるURL
+LOGIN_REDIRECT_URL = '/' 
+
+# ログアウト成功後にリダイレクトされるURL
+# LOGOUT_REDIRECT_URL = '/' # デフォルトでログインページに飛ぶので、トップに戻したい場合はこの設定を追加```
+
+> **Note:** `LoginView` と `LogoutView` を使うことで、ビューを自分で書く必要がなくなり、URLとテンプレートを用意するだけで機能が完成します。
+
+</details>
 <br>
+
 
 ### STEP 5: メモとユーザーの関連付け 🔗
 
