@@ -4,12 +4,38 @@
 
 ## 🚀 実装ロードマップ (Implementation Roadmap)
 
-###  STEP 1: 認証用アプリの作成 🏗️
+### STEP 1: 認証用アプリの作成 🏗️
 
 ユーザー認証関連の機能を専門に扱うための新しいアプリ（例：`accounts`）を作成し、プロジェクトに登録します。
 
 -   **コマンド**: `python manage.py startapp accounts`
 -   **設定**: `settings.py` の `INSTALLED_APPS` に `'accounts'` を追加
+
+<details>
+<summary>▶︎ 実際のコードを見る (Click to see code)</summary>
+
+<br>
+
+**1. `accounts` アプリの作成**
+
+ターミナルで以下のコマンドを実行します。
+
+```bash
+python manage.py startapp accounts
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'memos.apps.MemosConfig',
+    'accounts.apps.AccountsConfig', # この行を追加
+]```
+> **Note:** `apps.py` 内のクラス名 (`AccountsConfig`) を指定する、よりモダンな書き方を採用しています。
+
+</details>
 
 ### STEP 2: URLの設計と設定 🗺️
 
