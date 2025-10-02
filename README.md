@@ -6,6 +6,8 @@
 
 コードブロックスタート！！ーーーーーーーーーーーーーーーーーーーー
 
+コードブロックスタート！！ーーーーーーーーーーーーーーーーーーーー
+
 ### STEP 1: 認証用アプリの作成 🏗️
 
 ユーザー認証関連の機能を専門に扱うための新しいアプリ（例：`accounts`）を作成し、プロジェクトに登録します。
@@ -28,14 +30,14 @@ python manage.py startapp accounts
 
 # --- memoproject/settings.py ---
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'memos.apps.MemosConfig',
-    'accounts.apps.AccountsConfig', # この行を追加
+'django.contrib.admin',
+'django.contrib.auth',
+'django.contrib.contenttypes',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles',
+'memos.apps.MemosConfig',
+'accounts.apps.AccountsConfig', # この行を追加
 ]
 
 > **Note:** `apps.py` 内のクラス名 (`AccountsConfig`) を指定する、よりモダンな書き方を採用しています。
@@ -59,13 +61,13 @@ INSTALLED_APPS = [
 # プロジェクトのメインとなるURL設定ファイルを編集します。
 
 from django.contrib import admin
-from django.urls import path, include 
+from django.urls import path, include
 from memos.views import memo_list_create
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', memo_list_create, name='memo_list'),
-    path('accounts/', include('accounts.urls')),
+path('admin/', admin.site.urls),
+path('', memo_list_create, name='memo_list'),
+path('accounts/', include('accounts.urls')),
 ]
 
 # --- accounts/urls.py (新規作成) ---
@@ -77,7 +79,7 @@ from . import views
 app_name = 'accounts'
 
 urlpatterns = [
-    path('signup/', views.signup_view, name='signup'),
+path('signup/', views.signup_view, name='signup'),
 ]
 
 </details>
@@ -103,15 +105,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 
 def signup_view(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('accounts:login') 
-    else:
-        form = UserCreationForm()
-    
-    return render(request, 'accounts/signup.html', {'form': form})
+if request.method == 'POST':
+form = UserCreationForm(request.POST)
+if form.is_valid():
+form.save()
+return redirect('accounts:login')
+else:
+form = UserCreationForm()
+
+return render(request, 'accounts/signup.html', {'form': form})
 
 
 # --- accounts/templates/accounts/signup.html (新規作成) ---
@@ -125,9 +127,9 @@ def signup_view(request):
 <h1 class="page-title">サインアップ</h1>
 
 <form method="post" class="memo-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">登録する</button>
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit" class="btn btn-primary">登録する</button>
 </form>
 {% endblock %}
 
@@ -157,9 +159,9 @@ from . import views
 app_name = 'accounts'
 
 urlpatterns = [
-    path('signup/', views.signup_view, name='signup'),
-    path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+path('signup/', views.signup_view, name='signup'),
+path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
+path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
 
 
@@ -174,9 +176,9 @@ urlpatterns = [
 <h1 class="page-title">ログイン</h1>
 
 <form method="post" class="memo-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">ログイン</button>
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit" class="btn btn-primary">ログイン</button>
 </form>
 {% endblock %}
 
@@ -185,9 +187,14 @@ urlpatterns = [
 # ログイン・ログアウト後のリダイレクト先を追記します。
 # ファイルの末尾あたりに追加してください。
 
-LOGIN_REDIRECT_URL = '/' 
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 </details>
 <br>
+
+
+
+
+
 
