@@ -23,13 +23,16 @@
 > **1. `accounts` アプリの作成**
 >
 > ターミナルで以下のコマンドを実行します。
->'''
+> 
+>```python
 > python manage.py startapp accounts
->'''
+>```
+>
 > **2. プロジェクトへのアプリ登録**
 >
 > `memoproject/settings.py` ファイルを開き、`INSTALLED_APPS` リストに新しいアプリを追加します。
->
+> 
+>```
 > # --- memoproject/settings.py ---
 > INSTALLED_APPS = [
 > 'django.contrib.admin',
@@ -41,6 +44,7 @@
 > 'memos.apps.MemosConfig',
 > 'accounts.apps.AccountsConfig', # この行を追加
 > ]
+>```
 >
 > > **Note:** `apps.py` 内のクラス名 (`AccountsConfig`) を指定する、よりモダンな書き方を採用しています。
 
